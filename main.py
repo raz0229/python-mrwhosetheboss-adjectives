@@ -5,11 +5,12 @@ import os
 # CONFIGURATION
 CHANNEL_ID="UCMiJRAwDNSNzuYeN2uWa0pA"
 SEARCH_STRING="sub to the channel"
+TIME_OFFSET=-2
 
 # https://commentpicker.com/youtube-channel-id.php
 videos = scrapetube.get_channel(CHANNEL_ID)
 #video_id = input("Enter Video ID: ")
-f = open(f"url_list_{CHANNEL_ID}.txt", "a")    
+f = open(f"url_list.txt", "a")    
 # AaxPLnvCy08 (video with no given text)
 
 def getDurationOfTextAndNextLines(text, video_id):
@@ -17,14 +18,14 @@ def getDurationOfTextAndNextLines(text, video_id):
     result = list(filter(lambda e: text in e[1]['text'].lower(), enumerate(transcript)))
     temp = result[0]
     concat = transcript[int(temp[0]) + 1]['text'] + ' ' + transcript[int(temp[0]) + 2]['text']
-    return (int(temp[1]['start']) + 1, concat)
+    return (int(temp[1]['start']) + TIME_OFFSET, concat)
 
 if __name__ == '__main__':
     for video in videos:
         try:
             id = video['videoId']
             
-            print('\nWriting \'{}\' to file: url_list.txt')
+            print('\nWriting \'{}\' to file: url_list.txt'.format(id))
             current = getDurationOfTextAndNextLines(SEARCH_STRING, video_id=id)
             start_time = current[0]
             arr = current[1].replace('would be ', '').split()
