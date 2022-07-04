@@ -3,8 +3,8 @@ This repo was created to automate the video-making process for one of my YouTube
 Same process can be reconfigured and repeated to search for a specific keyword/line and keep track of it for your favorite YouTube creator.
 
  - ### Install Dependencies
- `pip3 install youtube_transcript_api scrapetube selenium --user`
- `pacman -S recordmydesktop ffmpeg`
+    pip3 install youtube_transcript_api scrapetube selenium --user
+    pacman -S recordmydesktop ffmpeg
 	
 (Refer to your distribution's package manager)
 
