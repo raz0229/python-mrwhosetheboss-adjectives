@@ -5,13 +5,7 @@ from selenium.webdriver.firefox.webdriver import FirefoxProfile
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from threading import Thread
-from time import sleep
-import subprocess
 import os
-
-def recordmydesktop(name):
-    subprocess.run(f'recordmydesktop -o downloads/{name}.ogv --on-the-fly-encoding --fps=25 > /dev/null 2>&1', shell=True)
 
 options = Options()
 options.headless = False
@@ -20,29 +14,22 @@ profile = FirefoxProfile("/home/raz0229/.mozilla/firefox/58m1hr3k.dev-edition-de
 
 # Configuration
 PATH = "/home/raz0229/Downloads/geckodriver"  # path to your downloaded webdriver
-DELAY = 12 # seconds (depending on your internet connection speed)
 
 driver = webdriver.Firefox(profile, executable_path=PATH, options=options)
 
 if __name__ == '__main__':
     try:
+        w=open('url_list_copy.txt', 'a')
         with open('url_list.txt', 'r') as f:
             for line in f:
                 file = line.split()
                 url = file[1]
-                filename = file[0]
                 driver.get(url)
                 date = WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#info-strings yt-formatted-string")))
-                fullScreenButton = WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.ytp-fullscreen-button.ytp-button')))
-                fullScreenButton.click()
-                sleep(2)
-                # playButton = WebDriverWait(driver, DELAY).until(EC.presence_of_element_located((By.CSS_SELECTOR, '.ytp-play-button.ytp-button')))
-                # playButton.click()
-                thread = Thread(target=recordmydesktop, args=(f"{filename}",))
-                thread.start()
-                sleep(DELAY)
-                subprocess.run('kill -9 recordmydesktop', shell=True)
-                print('\n Saved Recording: \'' + filename + '.ogv\' in {PWD}/downloads ')  # prints title of the webpage
+                w.write(f'{line} {date.text}\n')
+                # Force the OS to store the file buffer to disc
+                w.flush()
+                os.fsync(w.fileno())
             driver.close()
 
     except Exception as e:
