@@ -19,7 +19,7 @@ profile = FirefoxProfile("/home/raz0229/.mozilla/firefox/58m1hr3k.dev-edition-de
 
 # Configuration
 PATH = "/home/raz0229/Downloads/geckodriver"  # path to your downloaded webdriver
-DELAY = 8 # seconds (depending on your internet connection speed)
+DELAY = 12 # seconds (depending on your internet connection speed)
 
 driver = webdriver.Firefox(profile, executable_path=PATH, options=options)
 
