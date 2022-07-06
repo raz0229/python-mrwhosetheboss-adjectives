@@ -1,5 +1,5 @@
 ﻿## MrWhoseTheBoss Adjectives
-This repo was created to automate the video-making process for one of my YouTube videos titled *"Learn Adjectives with Arun"* which searches through the transcript of all of his videos and find the right keywords, then plays and screen-records the videos using ``Selenium`` bindings for Python and ``recordmydesktop``.
+This repo was created to automate the video-making process for one of my YouTube videos titled [Learn Adjectives with Arun](https://youtu.be/nO9iG033F3U) which searches through the transcript of all of his videos and find the right keywords, then plays and screen-records the videos using ``Selenium`` bindings for Python and ``recordmydesktop``.
 Same process can be reconfigured and repeated to search for a specific keyword/line and keep track of it for your favorite YouTube creator.
 
  - ### Install Dependencies
